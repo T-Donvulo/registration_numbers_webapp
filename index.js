@@ -54,7 +54,7 @@ app.post('/reg_numbers', async function(req, res){
     if(code === ""){
         req.flash('info', "Please enter number plate");
     }
-    else if ((!(/C[BST]\s\d{3}-\d{3}$|C[BST]\s\d{3}\d{3}$|C[BST]\s\d{3}$|C[BST]\s\d{3}\s\d{3}$|C[BST] \d{3,6}/.test(code)))){
+    else if ((!(/C[BST]\s\d{3}-\d{3}$|C[BST]\s\d{3}\d{3}$|C[BST]\s\d{3}$|C[BST]\s\d{3}\s\d{3}$|C[BST] \d{3,6}$/.test(code)))){
         req.flash('info', "Please enter the correct number plate");      
     }
     else if(duplicate !== 0){
