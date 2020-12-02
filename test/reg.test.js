@@ -71,10 +71,13 @@ describe("create function", function () {
                     "numberplate": "CS 124 123",
                 }], await registration.filter(3))
         })
+it("should ")
+
+
         it('should be able to clear number plate from the database', async function () {
             // the Factory Function is called greetFactory
-          
-    
+
+
             await registration.deletesNumberPlates("CB 158");
             await registration.deletesNumberPlates("CT 555 798");
             await registration.deletesNumberPlates("CS 555-694");
