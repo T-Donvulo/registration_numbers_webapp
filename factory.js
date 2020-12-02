@@ -18,15 +18,15 @@ module.exports = function factory(pool) {
         return check.rowCount
 
     }
-
+    async function ids(id) {
+        var townId = await pool.query('select id from town_codes where townName=$1', [id]);
+        console.log();
+        
+        return townId.rows[0].id
+    }
 
     //check if exists, then get the number plate(check the errors in it), then insert the number plate, 
     async function insertingNumberPlates(plate) {
-
-
-        // if ()) {
-        //     return
-        // }
 
         //give two characters of a string at the beginning of the number plate hence  (0,2 ) whic says two characters    
         var codes = plate.substring(0, 2)
@@ -34,8 +34,7 @@ module.exports = function factory(pool) {
         let town_tag = codes.toUpperCase();
         // console.log(town_tag)
 
-        var townId = await pool.query('select id from town_codes where townName=$1', [town_tag]);
-        var id = townId.rows[0].id
+        var id = await ids(town_tag)
         //    console.log(townId.rows[0].id) 
         let reg;
         if (id > 0) {
@@ -51,14 +50,13 @@ module.exports = function factory(pool) {
 
     async function filter(filt) {
         if (filt === 'All') {
-            var filtering = await pool.query('select * from number_plate');
+            var filtering = await pool.query('select numberPlate from number_plate');
             return filtering.rows
         }
         else {
-            const byTowns = await pool.query('select * from number_plate where townName_Id=$1', [filt]);
+            const byTowns = await pool.query('select numberPlate from number_plate where townName_Id=$1', [filt]);
             return byTowns.rows
         }
-        //check your filter
 
     }
 
@@ -81,7 +79,8 @@ module.exports = function factory(pool) {
         insertingNumberPlates,
         getsNumberPlate,
         deletesNumberPlates,
-        filter
+        filter,
+        ids
 
     }
 }
