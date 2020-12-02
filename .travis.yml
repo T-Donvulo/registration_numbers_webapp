@@ -9,7 +9,7 @@ env:
 
 before_script:  
   - psql -c 'create database registrations;' -U postgres
-  - psql -U postgres -d registratins -a -f table.sql
+  - psql -U postgres -d registrations -a -f table.sql
 
 services:
   - postgresql
